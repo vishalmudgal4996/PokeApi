@@ -2,12 +2,17 @@
   display: flex;
 }
 
-.planets-grid-item {
-  margin: 15px;
+.pokemons-grid-item {
+  margin: 5px;
   background-color: rosybrown;
   color: black;
 }
 
 .gridlistmain {
   transform: "translateZ(0)";
+}
+
+.left{
+  display: flex;
+  justify-content: center;
 }
