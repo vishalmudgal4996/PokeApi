@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/PokeApi/static/css/main.a617e044.chunk.css",
+    "main.js": "/PokeApi/static/js/main.55668a12.chunk.js",
+    "main.js.map": "/PokeApi/static/js/main.55668a12.chunk.js.map",
+    "runtime-main.js": "/PokeApi/static/js/runtime-main.51446de6.js",
+    "runtime-main.js.map": "/PokeApi/static/js/runtime-main.51446de6.js.map",
+    "static/js/2.6da78c24.chunk.js": "/PokeApi/static/js/2.6da78c24.chunk.js",
+    "static/js/2.6da78c24.chunk.js.map": "/PokeApi/static/js/2.6da78c24.chunk.js.map",
+    "static/js/3.a8ad7d0e.chunk.js": "/PokeApi/static/js/3.a8ad7d0e.chunk.js",
+    "static/js/3.a8ad7d0e.chunk.js.map": "/PokeApi/static/js/3.a8ad7d0e.chunk.js.map",
+    "index.html": "/PokeApi/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/PokeApi/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.6da78c24.chunk.js.LICENSE.txt": "/PokeApi/static/js/2.6da78c24.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/PokeApi/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.51446de6.js",
+    "static/js/2.6da78c24.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.55668a12.chunk.js"
+  ]
+}
