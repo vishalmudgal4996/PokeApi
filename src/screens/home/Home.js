@@ -25,10 +25,40 @@ import "./Home.css";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.baseUrl = "https://pokeapi.co/api/v2";
+    this.state = {
+      pokemonList: []
+    };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    let data = null;
+    let xhr = new XMLHttpRequest();
+    let that = this;
+
+    let type = 'pokemon'
+    let offset = 0, limit = 20;
+    offset = offset + limit;
+
+    const url = `${this.baseUrl}/${type}?offset=${offset}&limit=${limit}`;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(JSON.parse(this.responseText))
+        console.log(JSON.parse(this.responseText).results)
+
+        that.setState({
+          pokemonList: JSON.parse(this.responseText).results,        
+        });
+
+        console.log(that.state.pokemonList);
+      }
+    });
+
+    xhr.open("GET", url);
+    xhr.setRequestHeader("Cache-Control", "no-cache");
+    xhr.send(data);
+  }
 
   render() {
     //const { classes } = this.props;
