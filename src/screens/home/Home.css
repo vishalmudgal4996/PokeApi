@@ -13,9 +13,12 @@
 }
 
 .container{
+
+}
+
+.flex-container{
   display: flex;
   justify-content: center;
-
 }
 
 .characters{
@@ -26,8 +29,19 @@
   height: 95%;
   justify-content: space-evenly;
 }
+.navigation-panel{
+ display: flex;
+ justify-content: center;
+}
 
 body{
   background-color: grey;
   box-sizing: border-box;
+}
+
+.custom-btn{
+  color: #fff !important;
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+  margin: 10px !important;
 }

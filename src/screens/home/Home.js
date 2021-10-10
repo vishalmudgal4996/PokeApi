@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+import Button from "@material-ui/core/Button";
 import Typography from "@mui/material/Typography";
 import CardMedia from '@mui/material/CardMedia';
 
@@ -46,11 +46,14 @@ const bull = (
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.baseUrl = "https://pokeapi.co/api/v2";
     this.state = {
       pokemonList: [],
       imageUrl:
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+      loading: true,
+      baseUrl: "https://pokeapi.co/api/v2",
+      offset: 0,
+      limit: 20
     };
   }
 
@@ -64,7 +67,7 @@ class Home extends Component {
       limit = 20;
     //offset = offset + limit;
 
-    const url = `${this.baseUrl}/${type}?offset=${offset}&limit=${limit}`;
+    const url = `${this.state.baseUrl}/${type}`;
 
     xhr.addEventListener("readystatechange", function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -90,20 +93,27 @@ class Home extends Component {
       <div>
         <Header />
         <div className="container">
-          <div className="characters">
-            {this.state.pokemonList.map((item, index) => (
-              <Card sx={{ minWidth: 275 }} key={"item" + index} style={{ marginBottom: 20 + 'px' }}>
-                <CardMedia
-                  component="img"
-                  image={`${this.state.imageUrl}${index + 1}.png`}
-                  alt={item.name}
-                />
-                <CardActions style={{ justifyContent: "center", color: "black", fontWeight: "bolder"}}>
-                  {item.name}
-                </CardActions>
-              </Card>
-            ))}
+          <div className="navigation-panel">
+            <Button variant="success" className= "custom-btn">Prev</Button>
+            <Button variant="success" className= "custom-btn">Next</Button>
           </div>
+          <div className="flex-container">
+            <div className="characters">
+              {this.state.pokemonList.map((item, index) => (
+                <Card sx={{ minWidth: 275 }} key={"item" + index} style={{ marginBottom: 20 + 'px' }}>
+                  <CardMedia
+                    component="img"
+                    image={`${this.state.imageUrl}${index + 1}.png`}
+                    alt={item.name}
+                  />
+                  <CardActions style={{ justifyContent: "center", color: "black", fontWeight: "bolder" }}>
+                    {item.name}
+                  </CardActions>
+                </Card>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     );
