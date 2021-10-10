@@ -2,17 +2,9 @@ import React, { Component } from "react";
 import Header from "../../common/header/Header";
 import "./Home.css";
 import { withStyles } from "@material-ui/core/styles";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import Button from "@material-ui/core/Button";
-import Typography from "@mui/material/Typography";
 import CardMedia from '@mui/material/CardMedia';
 
 const styles = (theme) => ({
@@ -34,15 +26,6 @@ const styles = (theme) => ({
   },
 });
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -63,17 +46,11 @@ class Home extends Component {
     let that = this;
 
     let type = "pokemon";
-    let offset = 0,
-      limit = 20;
-    //offset = offset + limit;
 
     const url = `${this.state.baseUrl}/${type}`;
 
     xhr.addEventListener("readystatechange", function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log(JSON.parse(this.responseText));
-        console.log(JSON.parse(this.responseText).results);
-
         that.setState({
           pokemonList: JSON.parse(this.responseText).results,
         });
@@ -87,15 +64,56 @@ class Home extends Component {
     xhr.send(data);
   }
 
+  handlePrev = () => {
+    let type = "pokemon";
+    let offset = this.state.offset;
+    let limit = this.state.limit;
+    offset = offset - limit;
+
+    if (offset >= 0) {
+      const url = `${this.state.baseUrl}/${type}?offset=${offset}&limit=${limit}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(allpokemon => {
+          this.setState({
+            offset: offset,
+            pokemonList: allpokemon.results,
+          });
+          console.log(allpokemon.results);
+        });
+    }
+  }
+
+  handleNext = () => {
+    let type = "pokemon";
+    let offset = this.state.offset;
+    let limit = this.state.limit;
+    offset = offset + limit;
+
+    if (offset >= 0) {
+      const url = `${this.state.baseUrl}/${type}?offset=${offset}&limit=${limit}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(allpokemon => {
+          this.setState({
+            offset: offset,
+            pokemonList: allpokemon.results,
+          });
+          console.log(allpokemon.results);
+        });
+    }
+  }
+
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Header />
         <div className="container">
           <div className="navigation-panel">
-            <Button variant="success" className= "custom-btn">Prev</Button>
-            <Button variant="success" className= "custom-btn">Next</Button>
+            <Button variant="contained" className="custom-btn" onClick={this.handlePrev}>Prev</Button>
+            <Button variant="contained" className="custom-btn" onClick={this.handleNext}>Next</Button>
           </div>
           <div className="flex-container">
             <div className="characters">
@@ -103,7 +121,7 @@ class Home extends Component {
                 <Card sx={{ minWidth: 275 }} key={"item" + index} style={{ marginBottom: 20 + 'px' }}>
                   <CardMedia
                     component="img"
-                    image={`${this.state.imageUrl}${index + 1}.png`}
+                    image={`${this.state.imageUrl}${index + this.state.offset + 1}.png`}
                     alt={item.name}
                   />
                   <CardActions style={{ justifyContent: "center", color: "black", fontWeight: "bolder" }}>
