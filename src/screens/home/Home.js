@@ -7,6 +7,13 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import CardMedia from '@mui/material/CardMedia';
 
 const styles = (theme) => ({
   root: {
@@ -27,13 +34,23 @@ const styles = (theme) => ({
   },
 });
 
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+  >
+    •
+  </Box>
+);
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.baseUrl = "https://pokeapi.co/api/v2";
     this.state = {
       pokemonList: [],
-      imageUrl : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+      imageUrl:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
     };
   }
 
@@ -45,7 +62,7 @@ class Home extends Component {
     let type = "pokemon";
     let offset = 0,
       limit = 20;
-    offset = offset + limit;
+    //offset = offset + limit;
 
     const url = `${this.baseUrl}/${type}?offset=${offset}&limit=${limit}`;
 
@@ -67,30 +84,26 @@ class Home extends Component {
     xhr.send(data);
   }
 
-  
-
   render() {
     const { classes } = this.props;
     return (
       <div>
         <Header />
-        <div className="left">
-          <ImageList sx={{ width: 1000, height: 650 }} gap={8}
-              cols={4}
-              className={classes.gridListMain}>
+        <div className="container">
+          <div className="characters">
             {this.state.pokemonList.map((item, index) => (
-              <ImageListItem key={"item" + index}  className="pokemons-grid-item">
-                <img
-                  src={`${this.state.imageUrl}${index+21}.png`}
+              <Card sx={{ minWidth: 275 }} key={"item" + index} style={{ marginBottom: 20 + 'px' }}>
+                <CardMedia
+                  component="img"
+                  image={`${this.state.imageUrl}${index + 1}.png`}
                   alt={item.name}
-                  loading="lazy"
                 />
-                <ImageListItemBar
-                  title={item.name}
-                />
-              </ImageListItem>
+                <CardActions style={{ justifyContent: "center", color: "black", fontWeight: "bolder"}}>
+                  {item.name}
+                </CardActions>
+              </Card>
             ))}
-          </ImageList>
+          </div>
         </div>
       </div>
     );
