@@ -45,3 +45,34 @@ body{
   border-color: #198754 !important;
   margin: 10px !important;
 }
+
+@media only screen and (max-width: 1170px) and (min-width: 870px)  {
+
+  .characters{
+    width: 70%;
+  }
+
+}
+
+@media only screen and (max-width: 2351px) and (min-width: 1735px)  {
+
+  .characters{
+    width: 70%;
+  }
+
+}
+
+@media only screen and (max-width: 2530px) and (min-width: 2351px)  {
+
+  .characters{
+    width: 65%;
+  }
+
+}
+
+@media only screen and (max-width: 2725px) and (min-width: 2530px)  {
+
+  .characters{
+    width: 60%;
+  }
+}
